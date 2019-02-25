@@ -1,20 +1,18 @@
 
 
 
-
 class RedCar implements Runnable {
 
     
     Bridge control;
     int id;
-     
     
     RedCar(Bridge b,  int id) {
         
         this.id = id;
         control = b;
-        System.out.println("Red Car " + id + " Arrived at " + System.currentTimeMillis());   
-        System.out.flush();
+        control.printArrrivalTimeRed(this);
+        
     }
 
     public void run() {
@@ -22,11 +20,11 @@ class RedCar implements Runnable {
        
        try {
     	   	
-		control.redEnter();
+		control.redEnter(this);
 		
 		control.transit();
 		
-		control.redExit();
+		control.redExit(this);
 		
 		
 				
@@ -36,6 +34,7 @@ class RedCar implements Runnable {
 		
 		}
     }
+    
 
     
 

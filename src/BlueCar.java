@@ -1,4 +1,4 @@
-
+import java.time.Instant;
 
 class BlueCar implements Runnable {
 
@@ -11,10 +11,7 @@ class BlueCar implements Runnable {
       
         this.id = id;
         control = b;
-        for(int i=0;i<55;i++)
-     		System.out.print(" ");
-     	 System.out.println("Blue Car " + id +  " Arrived at " + System.currentTimeMillis());
-     	System.out.flush();
+        control.printArrrivalTimeBlue(this);
     }
 
     public void run() {
@@ -24,13 +21,13 @@ class BlueCar implements Runnable {
         	 
         	
         	 
-        	 control.blueEnter();
+        	 control.blueEnter(this);
         	 
         	        	 
         	 control.transit();     
         	 
         	 
-        	 control.blueExit();
+        	 control.blueExit(this);
         	 
               	 
         	 
@@ -41,5 +38,7 @@ class BlueCar implements Runnable {
   		
          }
     }
+    
+   
 
 }
