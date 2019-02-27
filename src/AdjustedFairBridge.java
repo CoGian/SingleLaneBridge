@@ -1,8 +1,8 @@
 import java.time.Instant;
 
-class FairBridge extends Bridge {
-
-    private int nred  = 0; //red cars passing the bridge 
+class AdjustedFairBridge extends Bridge{
+	
+	private int nred  = 0; //red cars passing the bridge 
     private int nblue = 0; //blue cars passing the bridge 
     private int waitblue = 0; //blue cars waiting to pass the bridge 
     private int waitred = 0; // red cars waiting to pass the bridge
@@ -71,5 +71,5 @@ class FairBridge extends Bridge {
         System.out.println("Blue Car " + car.id + " Passed at " +Instant.now());
      	System.out.flush();
     }
-}
 
+}

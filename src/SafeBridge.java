@@ -1,8 +1,7 @@
 
-import java.awt.*;
 import java.time.Instant;
 
-//when # same cars passing the bridge . First all of them  must pass the bridge and then notify other threads .
+
 class SafeBridge extends Bridge {
 
     private int nred  = 0; //red cars passing the bridge 
@@ -18,12 +17,14 @@ class SafeBridge extends Bridge {
         while (nblue>0 || nred == SingleLaneBridge.sameCarsInBridge || car.id  != maxRedID + 1) wait();
         ++nred;
         maxRedID = car.id;
+        
         System.out.println("Red Car " + car.id + " Passing at " + Instant.now());
 		System.out.flush();
         
     }
 
-    // a red car(thread) exit the bridge and wakes up ALL the other threads  
+    // a red car(thread) exit the bridge and wakes up ALL the other threads 
+    //when # same cars passing the bridge  all of them  must pass the bridge and then notify other threads .
     synchronized void redExit(RedCar car){
         --nred;
         if (nred== 0 )
@@ -49,6 +50,7 @@ class SafeBridge extends Bridge {
     }
 
     // a blue car(thread) exit the bridge and wakes up ALL the other threads  
+    //when # same cars passing the bridge all of them  must pass the bridge and then notify other threads .
     synchronized void blueExit(BlueCar car){
         --nblue;
         if (nblue== 0)

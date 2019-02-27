@@ -4,8 +4,8 @@ import java.time.Instant;
 class Bridge {
 	
 	
-	private int nred  = 0;
-    private int nblue = 0;
+	private int nred  = 0; //red cars passing the bridge 
+    private int nblue = 0; // blue cars passing the bridge
    
    
     // a red car enters in bridge .Critical Section (print info)

@@ -32,9 +32,9 @@ public class SingleLaneBridge {
 			b = new SafeBridge();
 		else if (method.equals("FairBridge")) 			
 			b = new FairBridge();
-		else  {
-			
-		}
+		else  
+			b = new AdjustedFairBridge();
+		
 		
 		
 		
