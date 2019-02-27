@@ -13,11 +13,10 @@ class AdjustedFairBridge extends Bridge{
 
     /*a red car(thread) waits while one or more(depending from sameCarsInBridge variable) blue cars(threads) are passing the bridge OR 
       one or more(depending from sameCarsInBridge variable) red cars(threads) are passing the bridge OR
-      it is blue cars's turn and there are blue cars waiting to pass 
-       */   
+      it is blue cars's turn and there are blue cars waiting to pass  */   
    synchronized void redEnter(RedCar car) throws InterruptedException {
         ++waitred;
-        while (nblue>0 || nred == SingleLaneBridge.sameCarsInBridge || car.id  != maxRedID + 1|| (waitblue>0 && blueturn)) wait();
+        while (nblue>0 || nred == SingleLaneBridge.sameCarsInBridge || car.id  != maxRedID + 1|| (waitblue>0 && blueturn)) wait();      	
         --waitred;
         ++nred;
         maxRedID = car.id;
@@ -29,9 +28,13 @@ class AdjustedFairBridge extends Bridge{
    
    // a red car(thread) exit the bridge and wakes up ALL the other threads 
   //when # same cars passing the bridge all of them  must pass the bridge and then notify other threads .
+   //important : if there are more red cars waiting than blue cars then it is red car's turn again . 
     synchronized void redExit(RedCar car){
         --nred;
-        blueturn = true;
+        if (waitred > waitblue)
+			blueturn = false ;
+        else
+        	blueturn = true;
         if (nred==0)
             notifyAll();
         
@@ -62,9 +65,13 @@ class AdjustedFairBridge extends Bridge{
 
     // a blue car(thread) exit the bridge and wakes up ALL the other threads 
     //when # same cars passing the bridge all of them  must pass the bridge and then notify other threads .
+    //important : if there are more blue cars waiting than red cars then it is blue car's turn again . 
     synchronized void blueExit(BlueCar car){
         --nblue;
-        blueturn = false;
+        if (waitblue > waitred)
+			blueturn = true ;
+        else
+        	blueturn = false;
         if (nblue==0)
             notifyAll();
         
