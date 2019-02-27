@@ -45,13 +45,10 @@ public class SingleLaneBridge {
 		
 		for (int i = 0; i<maxcars; i++) {
             red[i] = new Thread(new RedCar(b,i));
-            
-            if (i<4)
-            	blue[i] = new Thread(new BlueCar(b,i));
+            blue[i] = new Thread(new BlueCar(b,i));
             
             red[i].start();
-            if(i<4)
-            	blue[i].start();
+            blue[i].start();
          
             //Main thread sleeps for arrival frequency 
            try {

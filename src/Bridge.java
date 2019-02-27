@@ -8,7 +8,7 @@ class Bridge {
     private int nblue = 0; // blue cars passing the bridge
    
    
-    // a red car enters in bridge .Critical Section (print info)
+    //A red car enters in bridge .Critical Section (print info)
     synchronized void redEnter(RedCar car) throws InterruptedException {
     	
     	System.out.println("Red Car " + car.id + " Passing at " + Instant.now());
@@ -20,7 +20,7 @@ class Bridge {
     	++nred ; 
     }
 
-    // a red car  exits in bridge .Critical Section (print info)
+    // A red car  exits in bridge .Critical Section (print info)
     synchronized void redExit(RedCar car){
     	 for(int i=0;i<85;i++)
        		System.out.print(" ");
@@ -29,7 +29,7 @@ class Bridge {
 		--nred ; 
     }
 
-    // a blue car enters in bridge .Critical Section (print info)
+    // A blue car enters in bridge .Critical Section (print info)
     synchronized void blueEnter(BlueCar car) throws InterruptedException {
     	 for(int i=0;i<85;i++)
       		System.out.print(" ");
@@ -44,7 +44,7 @@ class Bridge {
      	 ++nblue ; 
     }
     
-    // a blue car  exits in bridge .Critical Section (print info)
+    // A blue car  exits in bridge .Critical Section (print info)
     synchronized void blueExit(BlueCar car){
     	
     	System.out.println("Blue Car " + car.id + " Passed at " +Instant.now());

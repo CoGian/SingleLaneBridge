@@ -11,7 +11,7 @@ class SafeBridge extends Bridge {
     private int maxBlueID = -1;// maximum blue car id that has passed or passing 
     
 
-    /*a red car(thread) waits while one or more(depending from sameCarsInBridge variable) blue cars(threads) are passing the bridge OR  
+    /*A red car(thread) waits while one or more(depending from sameCarsInBridge variable) blue cars(threads) are passing the bridge OR  
     one or more(depending from sameCarsInBridge variable) red cars(threads) are passing the bridge */
     synchronized void redEnter(RedCar car) throws InterruptedException {
         while (nblue>0 || nred == SingleLaneBridge.sameCarsInBridge || car.id  != maxRedID + 1) wait();
@@ -23,8 +23,8 @@ class SafeBridge extends Bridge {
         
     }
 
-    // a red car(thread) exit the bridge and wakes up ALL the other threads 
-    //when # same cars passing the bridge  all of them  must pass the bridge and then notify other threads .
+    /* A red car(thread) exit the bridge and wakes up ALL the other threads 
+    when # same cars passing the bridge  all of them  must pass the bridge and then notify other threads .*/
     synchronized void redExit(RedCar car){
         --nred;
         if (nred== 0 )
@@ -36,7 +36,7 @@ class SafeBridge extends Bridge {
 		System.out.flush();
     }
 
-    /*a blue car waits while one or more(depending from sameCarsInBridge variable) red cars are passing the bridge OR 
+    /*A blue car waits while one or more(depending from sameCarsInBridge variable) red cars are passing the bridge OR 
     one or more(depending from sameCarsInBridge variable) blue cars are passing the bridge */
     synchronized void blueEnter(BlueCar car) throws InterruptedException {
         while (nred>0 || nblue == SingleLaneBridge.sameCarsInBridge || car.id != maxBlueID + 1 ) wait();
@@ -49,8 +49,8 @@ class SafeBridge extends Bridge {
      	 System.out.flush();
     }
 
-    // a blue car(thread) exit the bridge and wakes up ALL the other threads  
-    //when # same cars passing the bridge all of them  must pass the bridge and then notify other threads .
+    /*A a blue car(thread) exit the bridge and wakes up ALL the other threads  
+    when # same cars passing the bridge all of them  must pass the bridge and then notify other threads .*/
     synchronized void blueExit(BlueCar car){
         --nblue;
         if (nblue== 0)
