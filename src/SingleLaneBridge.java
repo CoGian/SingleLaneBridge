@@ -53,25 +53,14 @@ public class SingleLaneBridge {
             //Main thread sleeps for arrival frequency 
            try {
 			Thread.sleep(arrivalFreq);
-		} catch (InterruptedException e) {
+           } catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+           }
            
-           
-
-            
+                       
 		}
             
-		
-		
-			
-			 
-		
-		
-		
-		
-		
 		
 	}
 

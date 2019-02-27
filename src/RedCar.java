@@ -1,6 +1,5 @@
 
 
-
 class RedCar implements Runnable {
 
     
