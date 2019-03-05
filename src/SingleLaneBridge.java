@@ -1,9 +1,10 @@
 
 
-// java SingleLaneBridge [max Cars] [Bridge] [arrival frequency milliseconds] [transit time in milliseconds] [#same cars in Bridge]
+// java SingleLaneBridge [max Red cars] [maxBluecars] [Bridge] [arrival frequency milliseconds] [transit time in milliseconds] [#same cars in Bridge]
 public class SingleLaneBridge {
 	
-	public static int maxcars ; 
+	public static int maxRedcars ; 
+	public static int maxBluecars ; 
 	public static int arrivalFreq  ; 
 	public static int transitTime ; 
 	public static int sameCarsInBridge ; 
@@ -13,17 +14,18 @@ public class SingleLaneBridge {
 		
 		
 		try {
-			maxcars =  Integer.parseInt(args[0])  ; 
-			arrivalFreq = Integer.parseInt(args[2]) ; 
-			transitTime = Integer.parseInt(args[3]); 
-			sameCarsInBridge = Integer.parseInt(args[4]) ; 
+			maxRedcars =  Integer.parseInt(args[0])  ; 
+			maxBluecars =  Integer.parseInt(args[1]) ;
+			arrivalFreq = Integer.parseInt(args[3]) ; 
+			transitTime = Integer.parseInt(args[4]); 
+			sameCarsInBridge = Integer.parseInt(args[5]) ; 
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Enter valid command arguments !");
-			System.out.println("java SingleLaneBridge [max cars] [Bridge] [arrival frequency milliseconds] [transit time in milliseconds] [#same cars in Bridge]");
+			System.out.println("java SingleLaneBridge [max Red cars] [maxBluecars] [Bridge] [arrival frequency milliseconds] [transit time in milliseconds] [#same cars in Bridge]");
 			System.exit(0);
 		}
-		String method = args[1] ; 
+		String method = args[2] ; 
 		Bridge b = null  ; 
 		
 		if (method.equals("Bridge")) 
@@ -40,16 +42,29 @@ public class SingleLaneBridge {
 		System.out.print(sameCarsInBridge) ; 
 		b.display();
 		
-		Thread red []   = new Thread[maxcars]; 
-		Thread blue []  = new Thread[maxcars];
+		Thread red []   = new Thread[maxRedcars]; 
+		Thread blue []  = new Thread[maxBluecars];
+		int maxcars ; 
+		
+		if(maxRedcars >= maxBluecars)
+			maxcars = maxRedcars ; 
+		else
+			maxcars = maxBluecars ; 
 		
 		for (int i = 0; i<maxcars; i++) {
-            red[i] = new Thread(new RedCar(b,i));
-            blue[i] = new Thread(new BlueCar(b,i));
-            
-            red[i].start();
-            blue[i].start();
-         
+			
+			
+			if(i<maxRedcars) {
+	            red[i] = new Thread(new RedCar(b,i));
+	            
+	            red[i].start();
+			}
+			
+			if(i<maxBluecars) {
+	            blue[i] = new Thread(new BlueCar(b,i));
+	            	            
+	            blue[i].start();
+			}
             //Main thread sleeps for arrival frequency 
            try {
 			Thread.sleep(arrivalFreq);
