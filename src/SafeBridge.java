@@ -11,8 +11,8 @@ class SafeBridge extends Bridge {
     private int maxBlueID = -1;// maximum blue car id that has passed or passing 
     
 
-    /*A red car(thread) waits while one or more(depending from sameCarsInBridge variable) blue cars(threads) are passing the bridge OR  
-    one or more(depending from sameCarsInBridge variable) red cars(threads) are passing the bridge */
+    /*A red car(thread) WAITS while one or more(depending from sameCarsInBridge variable) blue cars(threads) are passing the bridge OR  
+    one or more(depending from sameCarsInBridge variable) red cars(threads) are passing the bridge OR it isn't its turn*/
     synchronized void redEnter(RedCar car) throws InterruptedException {
         while (nblue>0 || nred == SingleLaneBridge.sameCarsInBridge || car.id  != maxRedID + 1) wait();
         ++nred;
@@ -36,8 +36,8 @@ class SafeBridge extends Bridge {
 		System.out.flush();
     }
 
-    /*A blue car waits while one or more(depending from sameCarsInBridge variable) red cars are passing the bridge OR 
-    one or more(depending from sameCarsInBridge variable) blue cars are passing the bridge */
+    /*A blue car WAITS while one or more(depending from sameCarsInBridge variable) red cars are passing the bridge OR 
+    one or more(depending from sameCarsInBridge variable) blue cars are passing the bridge OR it isn't its turn*/
     synchronized void blueEnter(BlueCar car) throws InterruptedException {
         while (nred>0 || nblue == SingleLaneBridge.sameCarsInBridge || car.id != maxBlueID + 1 ) wait();
         ++nblue;

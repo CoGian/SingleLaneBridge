@@ -22,7 +22,7 @@ class Bridge {
 
     // A red car  exits in bridge .Critical Section (print info)
     synchronized void redExit(RedCar car){
-    	 for(int i=0;i<85;i++)
+    	 for(int i=0;i<85;i++)	//spaces
        		System.out.print(" ");
     	System.out.println("Red Car " + car.id + " Passed at " + Instant.now());
 		System.out.flush();
@@ -31,7 +31,7 @@ class Bridge {
 
     // A blue car enters in bridge .Critical Section (print info)
     synchronized void blueEnter(BlueCar car) throws InterruptedException {
-    	 for(int i=0;i<85;i++)
+    	 for(int i=0;i<85;i++) //spaces
       		System.out.print(" ");
      	 System.out.println("Blue Car " + car.id + " Passing at " + Instant.now());
      	 System.out.flush();
@@ -68,12 +68,12 @@ class Bridge {
     
     public void display() {
     	System.out.print("Left Side");
-    	for(int i=0;i<50;i++)
+    	for(int i=0;i<50;i++)	//spaces
     		System.out.print(" ");
     	
     	System.out.print("Bridge");
     	
-    	for(int i=0;i<20;i++)
+    	for(int i=0;i<20;i++)	//spaces
     		System.out.print(" ");
     	
     	System.out.println("Right Side");
@@ -87,7 +87,7 @@ class Bridge {
     
     
     synchronized void  printArrrivalTimeBlue(BlueCar car) {
-   	 for(int i=0;i<85;i++)
+   	 for(int i=0;i<85;i++)	//spaces
      		System.out.print(" ");
    	System.out.println("Blue Car " + car.id +  " Arrived at " + Instant.now());
      	System.out.flush();

@@ -12,7 +12,7 @@ public class SingleLaneBridge {
 	public static void main(String[] args)  {
 		// TODO Auto-generated method stub
 		
-		
+		//pass arguments in static variables
 		try {
 			maxRedcars =  Integer.parseInt(args[0])  ; 
 			maxBluecars =  Integer.parseInt(args[1]) ;
@@ -50,7 +50,7 @@ public class SingleLaneBridge {
 			maxcars = maxRedcars ; 
 		else
 			maxcars = maxBluecars ; 
-		
+		//start creating and running threads .
 		for (int i = 0; i<maxcars; i++) {
 			
 			
