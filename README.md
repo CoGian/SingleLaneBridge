@@ -27,6 +27,7 @@ java SingleLaneBridge 2 3 Bridge 30 100 1
 ##### Outcome:
 
 ```
+Left Side                                                  Bridge                    Right Side
 Red Car 0 Arrived at 2019-03-15T16:29:23.851Z
 Red Car 0 Passing at 2019-03-15T16:29:23.913Z
                                                                                      Blue Car 0 Arrived at 2019-03-15T16:29:23.913Z
@@ -49,4 +50,12 @@ Blue Car 2 Passed at 2019-03-15T16:29:24.086Z
 ```
 
 ##### Conclusion:
-As you can see the first crash is between car A 
+For the shake of the example when a crash happens the execution doesn't stop.As you can see the first crash is between red car 0 ,which crosses the bridge, and blue car 0 which enters the bridge.Furthermore we have 3 other crashes when 1)red car 1 tried to enter the bridge but red car 0 and blue car 0 were crossing it , 2) blue car 1 tried to enter the bridge but red car 0 ,1 and blue car 0 were crossing it and finally 3) blue car 2 tried to enter the bridge but red car 0 ,1 and blue car 0,1 were crossing it.The outcome is what that i was expected.
+
+
+#### Safe Bridge
+Write in cmd or powershell :  
+
+```
+java SingleLaneBridge 2 3 SafeBridge 30 100 1
+```
