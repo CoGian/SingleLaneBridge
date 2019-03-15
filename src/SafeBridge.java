@@ -30,7 +30,7 @@ class SafeBridge extends Bridge {
         if (nred== 0 )
             notifyAll();
         
-        for(int i=0;i<85;i++)
+        for(int i=0;i<85;i++) //spaces
        		System.out.print(" ");
     	System.out.println("Red Car " + car.id + " Passed at " + Instant.now());
 		System.out.flush();
@@ -43,7 +43,7 @@ class SafeBridge extends Bridge {
         ++nblue;
         
         maxBlueID = car.id;
-        for(int i=0;i<85;i++)
+        for(int i=0;i<85;i++) //spaces
       		System.out.print(" ");
      	 System.out.println("Blue Car " + car.id + " Passing at " + Instant.now());
      	 System.out.flush();
