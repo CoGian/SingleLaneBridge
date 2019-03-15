@@ -12,7 +12,7 @@ class AdjustedFairBridge extends Bridge{
     private int maxBlueID = -1;// maximum blue car id that has passed or passing 
 
     /*A red car(thread) waits while one or more(depending from sameCarsInBridge variable) blue cars(threads) are passing the bridge OR 
-      one or more(depending from sameCarsInBridge variable) red cars(threads) are passing the bridge OR
+      one or more(depending from sameCarsInBridge variable) red cars(threads) are passing the bridge OR there are cars with smaller id that should pass first OR
       it is blue cars's turn and there are blue cars waiting to pass.  */   
    synchronized void redEnter(RedCar car) throws InterruptedException {
         ++waitred;
@@ -47,7 +47,7 @@ class AdjustedFairBridge extends Bridge{
     
     
     /*A blue car(thread) waits while one or more(depending from sameCarsInBridge variable) red cars(threads) are passing the bridge OR 
-    one or more(depending from sameCarsInBridge variable) blue cars(threads) are passing the bridge OR
+    one or more(depending from sameCarsInBridge variable) blue cars(threads) are passing the bridge OR there are cars with smaller id that should pass first OR
     it is red cars's turn and there are red cars waiting to pass .*/ 
     synchronized void blueEnter(BlueCar car)  throws InterruptedException {
         ++waitblue;
