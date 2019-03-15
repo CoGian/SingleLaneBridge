@@ -39,7 +39,7 @@ public class SingleLaneBridge {
 		
 		
 		
-		System.out.print(sameCarsInBridge) ; 
+		
 		b.display();
 		
 		Thread red []   = new Thread[maxRedcars]; 
