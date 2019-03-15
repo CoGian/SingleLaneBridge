@@ -1,5 +1,5 @@
 # Single Lane Bridge
-Demonstrates the use of multithreading to guide multiple cars of right and left side cross a single lane bridge.The skeleton code was taken from [Imperial College London](https://www.doc.ic.ac.uk/~jnm/book/book_applets/SingleLaneBridge.html).Every car is a thread. Red cars arrive on the left side of the bridge,the blue on the right. The frequency of arrival of cars, as well as the total number of cars cars arriving on each side are parameters of the simulation.The bridge is the shared memory area that we need to manage. The time which is required to pass a car, and how many cars on the same side they can pass each time are also parameters of the simulation.All cars enter the bridge hierarchically depending the time that they had came.
+Demonstrates the use of multithreading and monitors to guide multiple cars of right and left side cross a single lane bridge.The skeleton code was taken from [Imperial College London](https://www.doc.ic.ac.uk/~jnm/book/book_applets/SingleLaneBridge.html).Every car is a thread. Red cars arrive on the left side of the bridge,the blue on the right. The frequency of arrival of cars, as well as the total number of cars cars arriving on each side are parameters of the simulation.The bridge is the shared memory area that we need to manage. The time which is required to pass a car, and how many cars on the same side they can pass each time are also parameters of the simulation.All cars enter the bridge hierarchically depending the time that they had came.
 
 *Disclaimer: Times may differ but outcomes will be similar.  
 
@@ -116,4 +116,68 @@ Blue Car 2 Passed at 2019-03-15T17:37:10.150Z
 As you can see this time when red car 0 crosses the bridge the next car which crosses  is blue car 0 and after its exit ,the next car  crossing the bridge is red  and it is go on  like this till no car left. So there is fairness but when large amounts of same cars are arriving in one side the crowding is increasing in this side  and that's the reason why should make some adjustments to control the crowding . 
 
 
+#### Adjusted Fair Bridge 
+Write in cmd or powershell : 
+
+```
+java SingleLaneBridge 5 10 AdjustedFairBridge 30 100 1
+```
+
+##### Outcome:
+
+```
+Left Side                                                  Bridge                    Right Side
+Red Car 0 Arrived at 2019-03-15T17:58:52.939Z
+Red Car 0 Passing at 2019-03-15T17:58:53.002Z
+                                                                                     Blue Car 0 Arrived at 2019-03-15T17:58:53.002Z
+Red Car 1 Arrived at 2019-03-15T17:58:53.033Z
+                                                                                     Blue Car 1 Arrived at 2019-03-15T17:58:53.033Z
+Red Car 2 Arrived at 2019-03-15T17:58:53.065Z
+                                                                                     Blue Car 2 Arrived at 2019-03-15T17:58:53.065Z
+Red Car 3 Arrived at 2019-03-15T17:58:53.096Z
+                                                                                     Blue Car 3 Arrived at 2019-03-15T17:58:53.096Z
+                                                                                     Red Car 0 Passed at 2019-03-15T17:58:53.112Z
+                                                                                     Blue Car 0 Passing at 2019-03-15T17:58:53.112Z
+Red Car 4 Arrived at 2019-03-15T17:58:53.127Z
+                                                                                     Blue Car 4 Arrived at 2019-03-15T17:58:53.127Z
+                                                                                     Blue Car 5 Arrived at 2019-03-15T17:58:53.158Z
+                                                                                     Blue Car 6 Arrived at 2019-03-15T17:58:53.190Z
+                                                                                     Blue Car 7 Arrived at 2019-03-15T17:58:53.221Z
+Blue Car 0 Passed at 2019-03-15T17:58:53.221Z
+                                                                                     Blue Car 1 Passing at 2019-03-15T17:58:53.221Z
+                                                                                     Blue Car 8 Arrived at 2019-03-15T17:58:53.252Z
+                                                                                     Blue Car 9 Arrived at 2019-03-15T17:58:53.283Z
+Blue Car 1 Passed at 2019-03-15T17:58:53.330Z
+                                                                                     Blue Car 2 Passing at 2019-03-15T17:58:53.330Z
+Blue Car 2 Passed at 2019-03-15T17:58:53.440Z
+                                                                                     Blue Car 3 Passing at 2019-03-15T17:58:53.440Z
+Blue Car 3 Passed at 2019-03-15T17:58:53.549Z
+                                                                                     Blue Car 4 Passing at 2019-03-15T17:58:53.549Z
+Blue Car 4 Passed at 2019-03-15T17:58:53.659Z
+                                                                                     Blue Car 5 Passing at 2019-03-15T17:58:53.659Z
+Blue Car 5 Passed at 2019-03-15T17:58:53.768Z
+Red Car 1 Passing at 2019-03-15T17:58:53.768Z
+                                                                                     Red Car 1 Passed at 2019-03-15T17:58:53.877Z
+                                                                                     Blue Car 6 Passing at 2019-03-15T17:58:53.877Z
+Blue Car 6 Passed at 2019-03-15T17:58:53.987Z
+Red Car 2 Passing at 2019-03-15T17:58:53.987Z
+                                                                                     Red Car 2 Passed at 2019-03-15T17:58:54.096Z
+                                                                                     Blue Car 7 Passing at 2019-03-15T17:58:54.096Z
+Blue Car 7 Passed at 2019-03-15T17:58:54.205Z
+Red Car 3 Passing at 2019-03-15T17:58:54.205Z
+                                                                                     Red Car 3 Passed at 2019-03-15T17:58:54.314Z
+                                                                                     Blue Car 8 Passing at 2019-03-15T17:58:54.314Z
+Blue Car 8 Passed at 2019-03-15T17:58:54.424Z
+Red Car 4 Passing at 2019-03-15T17:58:54.424Z
+                                                                                     Red Car 4 Passed at 2019-03-15T17:58:54.534Z
+                                                                                     Blue Car 9 Passing at 2019-03-15T17:58:54.534Z
+Blue Car 9 Passed at 2019-03-15T17:58:54.643Z
+```
+
+##### Conclusion:
+As you can see from times we don't have any crashes , we have fairness but when cars are crowding on one side the fairness can be adjusted.For instance when blue car 0 passed the bridge we had 7 blue cars on right side and only 4 red cars on left side and it was red cars's turn but monitor adjusted to avoid overcrowding on right side , so it was blue cars's turn again .This continued until blue car 5 passed the bridge in that moment we had 4 blue cars and 4 red cars waiting so monitor became completely  fair and gave the turn to red cars from that moment till the end it is the same with fair bridge . 
+
+
+
+### For more information regarding this project please check my comments inside the code .
 
